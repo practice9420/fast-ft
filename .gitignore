@@ -1,0 +1,10 @@
+*.pyc
+.idea
+.git/
+.DS_Store
+fast-ft/upload/*
+build/
+dist/
+fast_ft.egg-info/
+fast_ft.egg-info/*
+fast_ft/.idea/

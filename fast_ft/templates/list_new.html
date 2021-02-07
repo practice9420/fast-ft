@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="always"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>
+    <script src="/static/jquery-1.11.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/webuploader/webuploader.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/webuploader/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/frameworks-32dce2faa502c3c56fb7b214ddbb6ec1.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container height-full">
+        <div class="row height-full">
+            <div class="col-xs-3 brand-title height-full">
+                <a href="/">
+                    <h1>pyUploader</h1>
+                </a>
+            </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container main-body">
+        <div class="row height-full">
+            <div class="col-lg-12 height-full">
+                <div id="file_list">
+                    <ul>
+                        <li>
+                            <p>
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span>{{ path }}</span>
+                                <a class="glyphicon glyphicon-copy float-right" id="copy_path" style="margin-right: 10px"></a>
+                            </p>
+                            <ul>
+                                {% if upload_path != path %}
+                                    <li class="bottom-line">
+                                        <p>
+                                            <span class="glyphicon glyphicon-folder-close"></span>
+                                            <span>
+                                                <a href="{{ url_for('file_list')}}?pre_folder={{ path }}">../</a>
+                                            </span>
+                                        </p>
+                                    </li>
+                                {% endif %}
+                                {% for file in files %}
+                                <li class="bottom-line">
+                                    <p>
+                                        <span class="glyphicon {% if file.is_folder %}glyphicon-folder-close{% else %}glyphicon-file{% endif %}"></span>
+                                        <span>{{ file.name }}</span>
+                                        <a class="glyphicon float-right {% if file.is_folder %}glyphicon-folder-open{% else %}glyphicon-cloud-download{% endif %}" href="{% if file.is_folder %}{{ url_for('file_list')}}?folder={% if folder %}{{ folder }}/{% endif %}{{ file.name }}{% else %}{{ url_for('file_download', filename=file.name)}}{% endif %}"></a>
+                                        {% if not file.is_folder %}
+                                            <span class="float-right">{{ file.size }}</span>
+                                        {% endif %}
+                                    </p>
+                                    <p>
+                                        <span>{{ file.update_date }}</span>
+                                    </p>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/clipboard.min.js"></script>
+    <script src="/static/js/list.js"></script>
+</body>
+</html>

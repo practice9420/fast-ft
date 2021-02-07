@@ -1,0 +1,4 @@
+include fast_ft/static/*
+include fast_ft/static/*/*
+include fast_ft/static/*/*/*
+include fast_ft/templates/*
