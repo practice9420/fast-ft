@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import os
+import sys
 from pathlib import Path
 
 from flask import Flask, request, Response, render_template as rt
@@ -125,5 +126,5 @@ def main(**kwargs):
 # -----------------------------------------------------------------------------
 
 
-if __name__ == '__main__':
+if __name__ == '__main__' or '__main__' in sys.argv:
     main()
