@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block block_title %}
+<title>聊天窗口 - 局域网文件传输工具</title>
+{% endblock %}
+
+{% block extend_css %}
+<link rel="stylesheet" type="text/css" href="/static/css/webchat.css">
+{% endblock %}
+
+{% block nav %}
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container height-full">
+    <div class="row height-full">
+        <div class="col-xs-3 brand-title height-full">
+            <a href="javascript:;" id="webchat">
+                <h1></h1>
+            </a>
+        </div>
+        <div class="col-xs-6 float-right height-full operation">
+            <a href="#" class="iframe-hidden float-right glyphicon glyphicon-minus"></a>
+            <a href="#" class="iframe-audio float-right glyphicon glyphicon-volume-off"></a>
+        </div>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block block_body %}
+    <div class="content-view">
+        <div class="scroll-wrapper">
+
+        </div>
+        <div class="box-editor">
+            <div class="toolbar">
+
+            </div>
+            <div class="content">
+
+            </div>
+        </div>
+        <div class="action">
+            <span>按下Ctrl+Enter换行</span>
+            <a href="#">发送</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block webchat %}
+{% endblock %}

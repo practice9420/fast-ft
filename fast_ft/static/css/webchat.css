@@ -1,0 +1,21 @@
+div.main-body {
+    padding: unset!important;
+    height: 90%!important;
+}
+div.main-body:before {
+    height: 0!important;
+    background-image: unset!important;
+}
+div.content-view {
+    max-width: 1000px;
+    height: 100%;
+    margin: auto;
+    background-color: #eeeeee;
+}
+div.operation > a {
+    color: #fff;
+    height: 100%;
+    line-height: 5.5rem;
+    font-size: 20px;
+    margin-left: 1rem;
+}

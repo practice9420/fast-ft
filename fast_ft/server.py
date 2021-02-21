@@ -7,9 +7,10 @@ from pathlib import Path
 
 from flask import Flask, request, Response, render_template as rt
 
-from .utils.get_folder_info import get_file_and_folder
-from .utils.make_qrcode import get_inner_ip, open_browser, make_qrcode_
-from .utils.health_examination import net_is_used
+from utils.get_folder_info import get_file_and_folder
+from utils.make_qrcode import get_inner_ip, open_browser, make_qrcode_
+from utils.health_examination import net_is_used
+from utils.process_argv import process_argv
 
 app = Flask(__name__)
 
@@ -36,7 +37,7 @@ def upload_part():  # 接收前端上传的一个分片
 
     upload_file = request.files['file']
     upload_file.save(upload.format(filename))  # 保存分片到本地
-    return rt('./index.html')
+    return rt('./index_new.html')
 
 
 @app.route('/file/merge', methods=['GET'])
@@ -57,7 +58,7 @@ def upload_success():  # 按序读出分片内容，并写入新文件
             chunk += 1
             os.remove(filename)  # 删除该分片，节约空间
 
-    return rt('./index.html')
+    return rt('./index_new.html')
 
 
 @app.route('/file/list', methods=['GET'])
@@ -97,7 +98,13 @@ def file_download(filename):
     return Response(send_chunk(), content_type='application/octet-stream')
 
 
-def main(**kwargs):
+@app.route('/webchat/', methods=['GET'])
+def get_webchat():
+    return rt('./webchat.html')
+
+
+def main():
+    kwargs = process_argv(sys.argv[1:])
     host = kwargs.get('host') if kwargs.get('host') else '0.0.0.0'
     port = int(kwargs.get('port')) if kwargs.get('port') else 5000
     # 检查 上传目录是否存在 不存在就创建

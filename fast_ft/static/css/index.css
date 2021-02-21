@@ -35,10 +35,10 @@ div.webuploader-pick {
     width: 68px;
 }
 div.brand-title h1 {
-    /*height: 100%;*/
-    /*margin-top: 15px;*/
-    /*margin-bottom: 15px;*/
+    height: 100%;
     line-height: 170%;
+    background: url(/static/images/title.png) left center no-repeat;
+    background-size: contain;
 }
 div.brand-title > a {
     color: unset!important;
@@ -134,6 +134,9 @@ div.select-picker  #download:hover {
     transform: translate(-50%, -50%);
     background-color: rgba(255,255,255,0.8);
 }
+#file_list > ul {
+    margin-bottom: 15px;
+}
 #file_list li > p {
     margin-bottom: unset;
 }
@@ -144,6 +147,98 @@ div.select-picker  #download:hover {
     margin-right: 5px;
 }
 #file_list li > ul > li {
-    padding: 0 10px;
+    padding: 0 15px;
     margin: 10px 0;
+}
+
+div.tool-box {}
+div.tool-box .tool-button {
+    position: fixed;
+    right: 5px;
+    bottom: 10px;
+}
+div.tool-box .tool-button > ul > li {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 5px;
+    position: relative;
+    background: #efeded;
+    border-radius: 50%;
+    border: 1px #f2f2f2 solid;
+    box-shadow: 0px 5px 20px rgb(232 236 240);
+}
+div.tool-box .tool-button > ul > li > span{
+    font-size: 20px;
+    width: 20px;
+    margin: auto;
+    position: absolute!important;
+    display: block!important;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.on-message {
+    background-color: #C49C5E!important;
+    -webkit-animation-timing-function:ease-in-out;
+    -webkit-animation-name:breathe;
+    -webkit-animation-duration:1500ms;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-direction:alternate;
+}
+
+/*呼吸灯效果*/
+@-webkit-keyframes breathe {
+    0% {
+    opacity:0.6;
+    transform: scale(.90) ;
+    }
+    100% {
+      opacity:1;
+      transform: scale(1);
+    }
+}
+@keyframes breathe {
+    0% {
+      opacity:0.6;
+      transform: scale(.90) ;
+    }
+    100% {
+      opacity:1;
+      transform: scale(1);
+    }
+}
+@-moz-keyframes breathe {
+    0% {
+      opacity:0.6;
+      transform: scale(.90) ;
+    }
+    100% {
+      opacity:1;
+      transform: scale(1);
+    }
+}
+@-o-keyframes breathe {
+    0% {
+      opacity:0.6;
+      transform: scale(.90) ;
+    }
+    100% {
+      opacity:1;
+      transform: scale(1);
+    }
+}
+/*./呼吸灯效果*/
+
+div.tool-box > div.webchat {
+    width: 355px;
+    height: 500px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+div.tool-box > div.webchat > iframe#chatIframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
