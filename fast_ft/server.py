@@ -1,16 +1,20 @@
 #!/usr/bin/env python
 # coding=utf-8
-
+import json
 import os
 import sys
 from pathlib import Path
 
 from flask import Flask, request, Response, render_template as rt
+from gevent.pywsgi import WSGIServer
+from geventwebsocket import WebSocketError
+from geventwebsocket.handler import WebSocketHandler
 
-from utils.get_folder_info import get_file_and_folder
-from utils.make_qrcode import get_inner_ip, open_browser, make_qrcode_
-from utils.health_examination import net_is_used
-from utils.process_argv import process_argv
+from .utils.get_folder_info import get_file_and_folder
+from .utils.get_ip import get_ip
+from .utils.make_qrcode import get_inner_ip, open_browser, make_qrcode_
+from .utils.health_examination import net_is_used
+from .utils.process_argv import process_argv
 
 app = Flask(__name__)
 
@@ -22,6 +26,7 @@ upload = os.path.join(BASE_DIR, 'upload/{}')
 
 # 全局内网IP
 global_inner_ip = 'test'
+user_socket_set = set()
 
 
 @app.route('/', methods=['GET'])
@@ -100,7 +105,50 @@ def file_download(filename):
 
 @app.route('/webchat/', methods=['GET'])
 def get_webchat():
-    return rt('./webchat.html')
+    return rt('./webchat.html', ws_url=global_inner_ip)
+
+
+@app.route("/socket/")
+def connection_socket():
+    user_socket = request.environ.get("wsgi.websocket")
+    ip = get_ip(request)
+    if user_socket:
+        user_socket_set.add(user_socket)
+        for u_socket in user_socket_set:
+            res_dict = {'chat_people': len(user_socket_set), 'is_update': True}
+            try:
+                u_socket.send(json.dumps(res_dict))
+            except Exception:
+                continue
+        print('当前socket列表长度：{}; 接入客户端ip：{}。'.format(len(user_socket_set), ip))
+    try:
+        while True:
+            req_json = user_socket.receive()
+            if req_json is None:
+                raise WebSocketError
+            receive_dict = json.loads(req_json)
+            msg = receive_dict.get('message')
+            nick_name = receive_dict.get('nick_name')
+            print('接受来自ip({})的信息：{}。'.format(ip, msg))
+            for u_socket in user_socket_set:
+                res_dict = {
+                    'message': msg, 'ip': ip, 'nick_name': nick_name, 'chat_people': len(user_socket_set),
+                    'is_mine': False if u_socket is not user_socket else True, 'is_update': False
+                }
+                try:
+                    u_socket.send(json.dumps(res_dict))
+                except Exception:
+                    continue
+    except WebSocketError as ex:
+        user_socket_set.remove(user_socket)
+        print('connection close：', ip)
+        for u_socket in user_socket_set:
+            res_dict = {'chat_people': len(user_socket_set), 'is_update': True}
+            try:
+                u_socket.send(json.dumps(res_dict))
+            except Exception:
+                continue
+        return 'close'
 
 
 def main():
@@ -126,7 +174,10 @@ def main():
     if kwargs.get('open_browser', True):
         open_url = 'http://{}:{}'.format(inner_ip, port)
         open_browser(open_url)
-    app.run(debug=False, threaded=True, host=host, port=port)
+    # 在APP外封装websocket
+    http_server = WSGIServer((host, port), app, handler_class=WebSocketHandler)
+    # 启动服务
+    http_server.serve_forever()
 
 # -----------------------------------------------------------------------------
 # Main entry point

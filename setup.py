@@ -13,11 +13,11 @@ with open("README.md", "r", encoding="UTF-8") as fh:
     long_description = fh.read()
 
 install_requires = ['click', 'Flask', 'itsdangerous', 'Jinja2', 'MarkupSafe', 'Pillow', 'qrcode',
-                    'six', 'Werkzeug']
+                    'six', 'Werkzeug', 'gevent-websocket']
 
 setuptools.setup(
     name="fast-ft",
-    version="0.0.9",
+    version="0.1.1",
     author="Uncle supported wall",
     author_email="2409256477@qq.com",
     description="A simple file transfer tool",

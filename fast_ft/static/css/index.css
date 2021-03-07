@@ -11,6 +11,15 @@
     div#file_list {
         width: 90%!important;
     }
+    div.webchat {
+        z-index: 9999;
+        width: 100%!important;
+        bottom: 0!important;
+        right: 0!important;
+    }
+    div.tool-box > div.webchat {
+        height: 100%!important;
+    }
 }
 html,
 body {
@@ -234,11 +243,19 @@ div.tool-box > div.webchat {
     width: 355px;
     height: 500px;
     position: fixed;
-    right: 0;
-    bottom: 0;
+    right: 5px;
+    bottom: 10px;
 }
 div.tool-box > div.webchat > iframe#chatIframe {
     width: 100%;
     height: 100%;
     border: 0;
+}
+div.webchat {
+    transition: all 0.2s;
+}
+
+.chat-close {
+    display: none;
+    height: 0!important;
 }

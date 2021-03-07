@@ -18,8 +18,9 @@
             </a>
         </div>
         <div class="col-xs-6 float-right height-full operation">
-            <a href="#" class="iframe-hidden float-right glyphicon glyphicon-minus"></a>
-            <a href="#" class="iframe-audio float-right glyphicon glyphicon-volume-off"></a>
+            <a href="#" id="close" class="iframe-hidden float-right glyphicon glyphicon-minus"></a>
+            <a href="#" id="m_able" class="iframe-audio float-right glyphicon glyphicon-volume-off"></a>
+            <a href="#" id="n_edit" class="iframe-audio float-right glyphicon glyphicon-edit" data-toggle="modal" data-target=".bs-example-modal-lg"></a>
         </div>
     </div>
   </div>
@@ -29,22 +30,83 @@
 {% block block_body %}
     <div class="content-view">
         <div class="scroll-wrapper">
-
+            <div class="scroll-title">大厅（0）</div>
+            <div class="scroll-content" id="chat_content">
+                <p></p>
+{#                <p class="time-bar">14:20</p>#}
+{#                <div class="user-bar-other">#}
+{#                    <div class="user-image">#}
+{#                        小#}
+{#                    </div>#}
+{#                    <div class="message-bar">#}
+{#                        <div class="user-info">#}
+{#                            小强(10.135.64.28)#}
+{#                        </div>#}
+{#                        <div class="message-content">#}
+{#                            最新数据统计显示，3月6日，中国GDP增长动态图冲上微博热搜引起网友讨论。据说自1953年起，我国发展国民经济第一个5年计划，截至2020年，中国国内生产总值突破100万亿元#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="user-bar-me">#}
+{#                    <div class="user-image">#}
+{#                        大#}
+{#                    </div>#}
+{#                    <div class="message-bar">#}
+{#                        <div class="user-info">#}
+{#                            大强(10.135.64.28)#}
+{#                        </div>#}
+{#                        <div class="message-content">#}
+{#                            最新数据统计显示，3月6日，中国GDP增长动态图冲上微博热搜引起网友讨论。据说自1953年起，我国发展国民经济第一个5年计划，截至2020年，中国国内生产总值突破100万亿元#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
         </div>
         <div class="box-editor">
-            <div class="toolbar">
-
-            </div>
+            <div class="toolbar"></div>
             <div class="content">
-
+                <textarea name="content" status="disable" id="input-content">说点什么吧...</textarea>
+            </div>
+            <div class="action">
+                <a href="#" id="send">发送</a>
+                <span>按下Ctrl+Enter换行</span>
             </div>
         </div>
-        <div class="action">
-            <span>按下Ctrl+Enter换行</span>
-            <a href="#">发送</a>
+    </div>
+     <audio id="tips" controls>
+    　　<source src="/static/audio/tips.mp3" type="audio/mpeg">
+    </audio>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">修改昵称</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <div class="col-xs-4 label">
+                                <label for="nick_name">昵称：</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control" id="nick_name" placeholder="length <= 8">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="update">修改</button>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
 
 {% block webchat %}
+    <script>var ws_url = "ws://{{ ws_url }}:5000/socket/";</script>
+    <script src="/static/js/webchat.js"></script>
 {% endblock %}

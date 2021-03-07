@@ -1,6 +1,13 @@
+@media (max-width: 768px) {
+    div.main-body {
+        height: 92%!important;
+    }
+}
+.navbar {
+    min-height: unset!important;
+}
 div.main-body {
     padding: unset!important;
-    height: 90%!important;
 }
 div.main-body:before {
     height: 0!important;
@@ -12,10 +19,179 @@ div.content-view {
     margin: auto;
     background-color: #eeeeee;
 }
+div.content-view > div.scroll-wrapper {
+    height: 70%;
+    position: relative;
+}
+div.content-view > div.scroll-wrapper > div.scroll-title {
+    position: absolute;
+    top: 0;
+    width: 96%;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 10px 0;
+    margin: 0 2%;
+    border-bottom: 1px solid #d6d6d6;
+    z-index: 9;
+    height: 10%;
+    line-height: inherit;
+}
+div.content-view div.user-bar-other::after,
+div.content-view div.user-bar-me::after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+div.content-view div.user-bar-other > div.message-bar > div.message-content::after,
+div.content-view div.user-bar-me > div.message-bar > div.message-content::after {
+    position: absolute;
+    top: 9px;
+    left: -12px;
+    border: 6px solid transparent;
+    content: " ";
+    border-right-color: #fff;
+}
+div.content-view div.user-bar-me > div.message-bar > div.message-content::after {
+    left: unset!important;
+    top: 9px;
+    right: -5px;
+    border-right: unset!important;
+    border-left-color: #fff;
+}
+div.content-view div.user-bar-other > div.message-bar > div.message-content > p,
+div.content-view div.user-bar-me > div.message-bar > div.message-content > p {
+    margin: unset!important;
+}
+div.content-view div.user-bar-other > div.message-bar > div.message-content,
+div.content-view div.user-bar-me > div.message-bar > div.message-content {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    position: relative;
+    min-height: 21px;
+    min-width: 40px;
+    line-height: 21px;
+}
+div.content-view div.user-bar-other > div.message-bar > div.user-info,
+div.content-view div.user-bar-me > div.message-bar > div.user-info {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+div.content-view div.user-bar-me > div.message-bar > div.user-info {text-align: right;}
+div.content-view div.user-bar-other > div.message-bar,
+div.content-view div.user-bar-me > div.message-bar {
+    float: left;
+    max-width: 70%;
+    margin-left: 15px;
+}
+div.content-view div.user-bar-me > div.message-bar {float: right!important; margin-right: 15px;}
+div.content-view > div.scroll-wrapper > div.scroll-content > div.user-bar-other > div.user-image,
+div.content-view > div.scroll-wrapper > div.scroll-content > div.user-bar-me > div.user-image {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: #14cfa6;
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    border-radius: 4px;
+    float: left;
+}
+div.content-view  div.user-bar-other > div.user-image{background-color: #ffa622!important;}
+div.content-view > div.scroll-wrapper > div.scroll-content > div.user-bar-me > div.user-image {
+    float: right!important;
+}
+div.content-view > div.scroll-wrapper > div.scroll-content > div.user-bar-other,
+div.content-view > div.scroll-wrapper > div.scroll-content > div.user-bar-me {
+    position: relative;
+    margin-bottom: 15px;
+}
+div.content-view > div.scroll-wrapper > div.scroll-content::-webkit-scrollbar-track-piece {
+    background: unset!important;
+}
+div.content-view > div.scroll-wrapper > div.scroll-content {
+    position: absolute;
+    width: 98%;
+    margin: 0 0 0 2%;
+    height: 90%;
+    bottom: 0;
+    padding: 10px 1.5% 0 0;
+    overflow-y: scroll;
+}
+div.content-view > div.box-editor {
+    position: relative;
+    height: 30%;
+    border-top: 1px solid #d6d6d6;
+}
+div.content-view > div.box-editor > div.content {
+    margin: 0 2%;
+    position: absolute;
+    width: 96%;
+    height: 75%;
+    padding: 1% 0;
+}
+.focus-color {color: rgb(51, 51, 51)!important;}
+div.content-view > div.box-editor > div.content > textarea#input-content {
+    width: 100%;
+    resize: none;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    font-size: 14px;
+    color: rgb(153, 153, 153);
+    background-color: rgb(238, 238, 238);
+}
+div.content-view div.action > span,
+div.content-view div.action > a {
+    float: right;
+}
+div.content-view > div.box-editor > div.action > span {
+    color: rgb(136, 136, 136);
+    font-size: 12px;
+    margin: 5px 10px;
+}
+div.content-view > div.box-editor > div.action > a {
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgb(193, 193, 193);
+    border-radius: 4px;
+    padding: 3px 30px;
+    color: rgb(34, 34, 34);
+    text-decoration-color: rgb(34, 34, 34);
+    max-height: 27px;
+}
+div.content-view > div.box-editor > div.action {
+    position: absolute;
+    margin: 0 2%;
+    height: 25%;
+    width: 96%;
+    bottom: 0;
+}
 div.operation > a {
     color: #fff;
-    height: 100%;
-    line-height: 5.5rem;
-    font-size: 20px;
+    font-size: 2rem;
     margin-left: 1rem;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+p.time-bar {
+    text-align: center;
+    font-size: 12px;
+    color: #b2b2b2;
+}
+audio#tips {
+    position: fixed;
+    top: 0;
+}
+div.input-group {
+    width: 80%;
+}
+div.input-group > input.form-control {
+    border-radius: 4px;
+}
+div.label > label {
+    color: #000;
+    line-height: 25px;
+    text-align: right;
 }
