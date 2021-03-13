@@ -52,9 +52,6 @@ $(function () {
     function click_send () {
         let msg = $('#input-content').val();
         if ($('#input-content').val() && $('#input-content').val() !== '说点什么吧...') {
-            msg = msg.replace('\r\n', '<br/>');
-            msg = msg.replace('\n', '<br/>');
-            msg = msg.replace('\r', '<br/>');
             let chat_data = JSON.stringify({'nick_name': nick_name, 'message': msg});
             $('#input-content').val("说点什么吧...");
             $('#input-content').removeClass("focus-color");
@@ -80,10 +77,15 @@ $(function () {
             }
         }
         let temp = `<div class="user-bar-${mine_class}">
-                        <div class="user-image">${nick_name_img}</div>
+                        <div class="user-image">
+                            ${nick_name_img}
+                            <div id="copy">copy</div>
+                        </div>
                         <div class="message-bar">
                             <div class="user-info">${nick_name}</div>
-                            <div class="message-content">${obj.message}</div>
+                            <div class="message-content">
+                                <pre>${obj.message}</pre>
+                            </div>
                         </div>
                     </div>`;
         let time = 0;
@@ -167,4 +169,17 @@ $(function () {
             $(v).find('div.user-info').eq(0).html(user_info);
         });
     }
+    // 复制消息[1].children[]
+    var clipboard = new ClipboardJS('#copy', {
+        target: function(e) {
+            console.log(e.parentNode.parentNode.children, e.parentNode.parentNode.children[1].children[1], e.parentNode.parentNode.children[1].children[1].children[0], e.parentNode.parentNode.children[1].children[1].children[0].innerHTML);
+            return e.parentNode.parentNode.children[1].children[1].children[0];
+        }
+    });
+    clipboard.on('success', function(e) {
+        // alert('复制成功！');
+    });
+    clipboard.on('error', function(e) {
+        // alert('复制失败！');
+    });
 });

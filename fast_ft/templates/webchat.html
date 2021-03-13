@@ -4,6 +4,10 @@
 <title>聊天窗口 - 局域网文件传输工具</title>
 {% endblock %}
 
+{% block extend_script %}
+<script src="/static/js/clipboard.min.js"></script>
+{% endblock %}
+
 {% block extend_css %}
 <link rel="stylesheet" type="text/css" href="/static/css/webchat.css">
 {% endblock %}
@@ -33,33 +37,6 @@
             <div class="scroll-title">大厅（0）</div>
             <div class="scroll-content" id="chat_content">
                 <p></p>
-{#                <p class="time-bar">14:20</p>#}
-{#                <div class="user-bar-other">#}
-{#                    <div class="user-image">#}
-{#                        小#}
-{#                    </div>#}
-{#                    <div class="message-bar">#}
-{#                        <div class="user-info">#}
-{#                            小强(10.135.64.28)#}
-{#                        </div>#}
-{#                        <div class="message-content">#}
-{#                            最新数据统计显示，3月6日，中国GDP增长动态图冲上微博热搜引起网友讨论。据说自1953年起，我国发展国民经济第一个5年计划，截至2020年，中国国内生产总值突破100万亿元#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="user-bar-me">#}
-{#                    <div class="user-image">#}
-{#                        大#}
-{#                    </div>#}
-{#                    <div class="message-bar">#}
-{#                        <div class="user-info">#}
-{#                            大强(10.135.64.28)#}
-{#                        </div>#}
-{#                        <div class="message-content">#}
-{#                            最新数据统计显示，3月6日，中国GDP增长动态图冲上微博热搜引起网友讨论。据说自1953年起，我国发展国民经济第一个5年计划，截至2020年，中国国内生产总值突破100万亿元#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
             </div>
         </div>
         <div class="box-editor">
@@ -107,6 +84,17 @@
 {% endblock %}
 
 {% block webchat %}
-    <script>var ws_url = "ws://{{ ws_url }}:5000/socket/";</script>
+    <script>
+        var ws_url = "ws://{{ ws_url }}:5000/socket/";
+        // 监听webchat logo点击
+        $('a#webchat').on('click', function () {
+            //判断是否在iframe中
+            if(self!=top){
+                parent.window.location.replace(window.location.href);
+            } else {
+                parent.window.location.replace('/');
+            }
+        });
+    </script>
     <script src="/static/js/webchat.js"></script>
 {% endblock %}

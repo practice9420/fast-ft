@@ -10,11 +10,14 @@ from gevent.pywsgi import WSGIServer
 from geventwebsocket import WebSocketError
 from geventwebsocket.handler import WebSocketHandler
 
-from .utils.get_folder_info import get_file_and_folder
-from .utils.get_ip import get_ip
-from .utils.make_qrcode import get_inner_ip, open_browser, make_qrcode_
-from .utils.health_examination import net_is_used
-from .utils.process_argv import process_argv
+# 打包后添加当前目录到环境变量以便导入项目中的包
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from utils.get_folder_info import get_file_and_folder
+from utils.get_ip import get_ip
+from utils.make_qrcode import get_inner_ip, open_browser, make_qrcode_
+from utils.health_examination import net_is_used
+from utils.process_argv import process_argv
 
 app = Flask(__name__)
 

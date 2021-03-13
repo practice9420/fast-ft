@@ -5,10 +5,10 @@ $(document).ready(function() {
         }
     });
     clipboard.on('success', function(e) {
-        alert('复制成功！');
+        // alert('复制成功！');
     });
     clipboard.on('error', function(e) {
-        alert('复制失败！');
+        // alert('复制失败！');
     });
     // 监听iframe点击时间
     let iframe = document.getElementById('chatIframe'); 

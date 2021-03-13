@@ -17,7 +17,7 @@ install_requires = ['click', 'Flask', 'itsdangerous', 'Jinja2', 'MarkupSafe', 'P
 
 setuptools.setup(
     name="fast-ft",
-    version="0.1.1",
+    version="0.1.2",
     author="Uncle supported wall",
     author_email="2409256477@qq.com",
     description="A simple file transfer tool",

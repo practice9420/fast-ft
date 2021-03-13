@@ -68,3 +68,23 @@ Ease, developers no longer need to rely on social applications (QQ, wechat) to c
 
 * [感谢开源项目](https://github.com/lsm1103/pyupload)
 
+## 版本说明
+
+> fast-ft 0.1.1
+>
+> ```
+> 1.加入聊天大厅。
+> ```
+>
+> fast-ft 0.1.2
+>
+> ```
+> 1.修复聊天大厅发送代码后样式错乱；
+> 2.添加每条消息copy复制按钮；
+> 3.首页点击聊天大厅logo跳转聊天大厅单独页面；
+> 4.聊天大厅单独页面点击logo跳转到首页;
+> 5.项目根目录加入到sys.path环境变量。
+> ```
+>
+> 
+
