@@ -84,6 +84,7 @@ div.content-view div.user-bar-me > div.message-bar > div.message-content > pre {
     background-color: unset;
     border: unset;
     padding: unset;
+    white-space: pre-wrap;
 }
 div.content-view div.user-bar-other > div.message-bar > div.message-content,
 div.content-view div.user-bar-me > div.message-bar > div.message-content {

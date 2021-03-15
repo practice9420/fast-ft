@@ -28,7 +28,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 upload = os.path.join(BASE_DIR, 'upload/{}')
 
 # 全局内网IP
-global_inner_ip = 'test'
+global_inner_ip = '127.0.0.1'
+global_port = 5000
 user_socket_set = set()
 
 
@@ -108,7 +109,7 @@ def file_download(filename):
 
 @app.route('/webchat/', methods=['GET'])
 def get_webchat():
-    return rt('./webchat.html', ws_url=global_inner_ip)
+    return rt('./webchat.html', ws_url=global_inner_ip, ws_port=global_port)
 
 
 @app.route("/socket/")
@@ -123,7 +124,7 @@ def connection_socket():
                 u_socket.send(json.dumps(res_dict))
             except Exception:
                 continue
-        print('当前socket列表长度：{}; 接入客户端ip：{}。'.format(len(user_socket_set), ip))
+        print('当前socket列表长度：{}； 接入客户端ip：{}。'.format(len(user_socket_set), ip))
     try:
         while True:
             req_json = user_socket.receive()
@@ -144,7 +145,7 @@ def connection_socket():
                     continue
     except WebSocketError as ex:
         user_socket_set.remove(user_socket)
-        print('connection close：', ip)
+        print('当前socket列表长度：{}； 断开客户端ip：{}；'.format(len(user_socket_set), ip))
         for u_socket in user_socket_set:
             res_dict = {'chat_people': len(user_socket_set), 'is_update': True}
             try:
@@ -161,15 +162,17 @@ def main():
     # 检查 上传目录是否存在 不存在就创建
     if not Path(upload.format('')).exists():
         os.mkdir(upload.format(''))
-    if net_is_used(port):
-        for i in range(3):
-            port += 1
-            if not net_is_used(port):
-                break
     # 生成二维码
     inner_ip = get_inner_ip()
     global global_inner_ip
     global_inner_ip = inner_ip
+    if net_is_used(port):
+        for i in range(10):
+            port += 1
+            if not net_is_used(port, inner_ip):
+                break
+    global global_port
+    global_port = port
     make_url = 'http://{}:{}'.format(inner_ip, port)
     save_path = os.path.join(BASE_DIR, 'static/images/qrcode/')
     make_qrcode_(make_url=make_url, save_path=save_path, qrcode_name='{}.png'.format(inner_ip))

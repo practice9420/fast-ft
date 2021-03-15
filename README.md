@@ -86,5 +86,12 @@ Ease, developers no longer need to rely on social applications (QQ, wechat) to c
 > 5.项目根目录加入到sys.path环境变量。
 > ```
 >
+>fast-ft 0.1.4
+> ```
+> 1.修复聊天记录pre标签不会自动换行问题（原来需要手动换行才能换行，否则触发横向滑动）；
+> 2.修复开放选择端口机制，将重试机制由3次增加到10次；
+> 3.修复webchat页面开放选择端口后，页面固定端口请求websocket连接漏洞；
+> 4.调整工具运行时命令行提示字符规范化。
+> ```
 > 
 

@@ -85,7 +85,7 @@
 
 {% block webchat %}
     <script>
-        var ws_url = "ws://{{ ws_url }}:5000/socket/";
+        var ws_url = "ws://{{ ws_url }}:{{ ws_port }}/socket/";
         // 监听webchat logo点击
         $('a#webchat').on('click', function () {
             //判断是否在iframe中

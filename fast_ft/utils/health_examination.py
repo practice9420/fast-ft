@@ -23,7 +23,7 @@ def net_is_used(port, ip='127.0.0.1'):
         s.shutdown(2)
         return True
     except Exception as e:
-        print(e)
+        print('bind host: http://{}:{}'.format(ip, port))
         return False
 
 
