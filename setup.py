@@ -7,17 +7,33 @@
 ------------      -------    --------    -----------
 2021/2/6 21:37   huangjh      1.0         None
 """
+import os
 import setuptools
+
+base_path = os.getcwd()
 
 with open("README.md", "r", encoding="UTF-8") as fh:
     long_description = fh.read()
 
-install_requires = ['click', 'Flask', 'itsdangerous', 'Jinja2', 'MarkupSafe', 'Pillow', 'qrcode',
-                    'six', 'Werkzeug', 'gevent-websocket']
+
+def install_requires():
+    """ install fast-ft require packages """
+
+    requirements_path = os.path.join(base_path, "fast_ft/requirements.txt")
+    assert os.path.isfile(requirements_path), "`fast_ft/requirements.txt` is not exist"
+
+    require_item_list = list()
+    with open(requirements_path, "r") as f:
+        require_package_list = f.readlines()
+        for package in require_package_list:
+            require_item_list.append(package.replace("\n", ""))
+
+    return require_item_list
+
 
 setuptools.setup(
     name="fast-ft",
-    version="0.1.4",
+    version="0.1.5",
     author="Uncle supported wall",
     author_email="2409256477@qq.com",
     description="A simple file transfer tool",
@@ -31,7 +47,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=install_requires,
+    install_requires=install_requires(),
     entry_points={
         'console_scripts': [
             'fast-ft = fast_ft.server:main',

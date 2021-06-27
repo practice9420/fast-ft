@@ -94,4 +94,11 @@ Ease, developers no longer need to rely on social applications (QQ, wechat) to c
 > 4.调整工具运行时命令行提示字符规范化。
 > ```
 > 
+> fast-ft 0.1.5
+> ```
+> 1.优化fast-ft setup.py 安装依赖插件包指定版本;
+> 2.修复聊天室无法发送html代码问题;
+> 3.修复Android系统下h5无法获取[jpg, png]图片文件名漏洞。
+> ```
+> 
 
