@@ -16,24 +16,23 @@ with open("README.md", "r", encoding="UTF-8") as fh:
     long_description = fh.read()
 
 
-def install_requires():
-    """ install fast-ft require packages """
-
-    requirements_path = os.path.join(base_path, "fast_ft/requirements.txt")
-    assert os.path.isfile(requirements_path), "`fast_ft/requirements.txt` is not exist"
-
-    require_item_list = list()
-    with open(requirements_path, "r") as f:
-        require_package_list = f.readlines()
-        for package in require_package_list:
-            require_item_list.append(package.replace("\n", ""))
-
-    return require_item_list
+install_requires = [
+    "click==6.7",
+    "Flask==0.12.2",
+    "itsdangerous==0.24",
+    "Jinja2==2.9.6",
+    "MarkupSafe",
+    "Pillow==7.2.0",
+    "qrcode==5.1",
+    "six==1.15.0",
+    "Werkzeug==0.12.2",
+    "gevent-websocket"
+]
 
 
 setuptools.setup(
     name="fast-ft",
-    version="0.1.5",
+    version="0.1.6",
     author="Uncle supported wall",
     author_email="2409256477@qq.com",
     description="A simple file transfer tool",
@@ -47,7 +46,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=install_requires(),
+    install_requires=install_requires,
     entry_points={
         'console_scripts': [
             'fast-ft = fast_ft.server:main',
