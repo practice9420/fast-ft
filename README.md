@@ -45,6 +45,24 @@ Ease, developers no longer need to rely on social applications (QQ, wechat) to c
 
 * [bilibili效果演示](https://www.bilibili.com/video/BV1SK4y1D7Zt)
 
+  #### PC effect:
+  
+  ![pc_index.png](./images/pc_index.png)
+  
+  ![pc_chat_room.png](./images/pc_chat_room.png)
+  
+  ![pc_download.png](./images/pc_download.png)
+
+  #### Mobile effect:
+  
+  ![mobile_index.png](./images/mobile_index.png)
+  
+  ![mobile_chat_room.png](./images/mobile_chat_room.png)
+  
+  ![mobile_download.png](./images/mobile_download.png)
+  
+
+
 
 
 ## 技术（technology）
