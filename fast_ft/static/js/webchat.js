@@ -14,26 +14,24 @@ $(function () {
         $(this).attr("status", "disable");
     });
     // websocket部分
-    let ws = null;
     // 创建websocket连接
     let nick_name = '';
     let ip = '';
     let per_time = 0;
     let is_paly = false;
-    if ('WebSocket' in window) {
-        ws = new WebSocket(ws_url);
-    } else if ('MozWebSocket' in window) {
-        ws = new MozWebSocket(ws_url);
-    } else {
-        ws = new SockJS(ws_url);
-    }
+    let ws = io.connect('http://' + document.domain + ':' + location.port + "/socket/");
     let content = $("#chat_content");
-    ws.onopen = function () {
+    ws.on("connect", function (data) {
         console.log('连接成功：', new Date());
-    };
-    ws.onmessage = function (event) {
-        let event_data = JSON.parse(event.data);
-        // console.log('获取到来自服务器消息：', event_data, event);
+    });
+    ws.on("response", function (data) {
+        let event_data = data;
+        console.log('获取到来自服务器消息：', event_data);
+        $('div.scroll-title').html(`大厅（${event_data.chat_people}）`);
+    });
+    ws.on("message", function (data) {
+        console.log("响应消息", data);
+        let event_data = data;
         if (!event_data.is_update) {
             let temp_array = make_html(event_data);
             for (let temp in temp_array) {
@@ -46,8 +44,7 @@ $(function () {
                 audio.play();
             }
         }
-        $('div.scroll-title').html(`大厅（${event_data.chat_people}）`);
-    };
+    })
     $("#send").on("click", click_send);
     function click_send () {
         let msg = $('#input-content').val();
@@ -55,7 +52,8 @@ $(function () {
             let chat_data = JSON.stringify({'nick_name': nick_name, 'message': msg});
             $('#input-content').val("说点什么吧...");
             $('#input-content').removeClass("focus-color");
-            ws.send(chat_data);
+            // ws.send(chat_data);
+            ws.emit("message", {'nick_name': nick_name, 'message': msg})
         }
         return false;
     }
@@ -172,7 +170,7 @@ $(function () {
     // 复制消息[1].children[]
     var clipboard = new ClipboardJS('#copy', {
         target: function(e) {
-            console.log(e.parentNode.parentNode.children, e.parentNode.parentNode.children[1].children[1], e.parentNode.parentNode.children[1].children[1].children[0], e.parentNode.parentNode.children[1].children[1].children[0].innerHTML);
+            // console.log(e.parentNode.parentNode.children, e.parentNode.parentNode.children[1].children[1], e.parentNode.parentNode.children[1].children[1].children[0], e.parentNode.parentNode.children[1].children[1].children[0].innerHTML);
             return e.parentNode.parentNode.children[1].children[1].children[0];
         }
     });

@@ -72,5 +72,6 @@ def size_format(size):
 
 
 if __name__ == '__main__':
-    path_ = 'D:\\program\\pyupload\\upload/'
-    get_file_and_folder(path_)
+    path_ = 'C:\\program1\\fast-ft\\fast_ft\\upload\\'
+    result = get_file_and_folder(path_)
+    print(result)

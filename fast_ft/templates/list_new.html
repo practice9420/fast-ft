@@ -26,7 +26,7 @@
                                 <p>
                                     <span class="glyphicon glyphicon-folder-close"></span>
                                     <span>
-                                        <a href="{{ url_for('file_list')}}?pre_folder={{ path }}">../</a>
+                                        <a href="{{ url_for('transferFile.file_list')}}?pre_folder={{ path }}">../</a>
                                     </span>
                                 </p>
                             </li>
@@ -36,7 +36,7 @@
                             <p>
                                 <span class="glyphicon {% if file.is_folder %}glyphicon-folder-close{% else %}glyphicon-file{% endif %}"></span>
                                 <span>{{ file.name }}</span>
-                                <a class="glyphicon float-right {% if file.is_folder %}glyphicon-folder-open{% else %}glyphicon-cloud-download{% endif %}" href="{% if file.is_folder %}{{ url_for('file_list')}}?folder={% if folder %}{{ folder }}/{% endif %}{{ file.name }}{% else %}{{ url_for('file_download', filename=file.name)}}{% endif %}"></a>
+                                <a class="glyphicon float-right {% if file.is_folder %}glyphicon-folder-open{% else %}glyphicon-cloud-download{% endif %}" href="{% if file.is_folder %}{{ url_for('transferFile.file_list')}}?folder={% if folder %}{{ folder }}/{% endif %}{{ file.name }}{% else %}{{ url_for('transferFile.file_download', filename=file.name)}}{% endif %}"></a>
                                 {% if not file.is_folder %}
                                     <span class="float-right">{{ file.size }}</span>
                                 {% endif %}
