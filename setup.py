@@ -17,8 +17,11 @@ with open("README.md", "r", encoding="UTF-8") as fh:
 
 
 install_requires = [
+    "bidict==0.21.2",
+    "cffi==1.14.5",
     "click==6.7",
     "Flask==0.12.2",
+    "Flask-SocketIO==4.2.1",
     "itsdangerous==0.24",
     "Jinja2==2.9.6",
     "MarkupSafe",
@@ -26,13 +29,16 @@ install_requires = [
     "qrcode==5.1",
     "six==1.15.0",
     "Werkzeug==0.12.2",
-    "gevent-websocket"
+    "python-engineio==3.11.2",
+    "python-socketio==4.4.0",
+    "zope.event==4.5.0",
+    "zope.interface==5.4.0"
 ]
 
 
 setuptools.setup(
     name="fast-ft",
-    version="0.1.6",
+    version="0.2.0",
     author="Uncle supported wall",
     author_email="2409256477@qq.com",
     description="A simple file transfer tool",

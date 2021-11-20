@@ -5,10 +5,9 @@ import sys
 from pathlib import Path
 
 # 打包后添加当前目录到环境变量以便导入项目中的包
-from settings import Config
-from create_app import create_app, socket_server
-
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from settings import Config
+from fast_ft import create_app, socket_server
 from utils.make_qrcode import get_inner_ip, open_browser, make_qrcode_
 from utils.health_examination import net_is_used
 from utils.process_argv import process_argv
@@ -40,12 +39,12 @@ def main():
     save_path = os.path.join(BASE_DIR, "static/images/qrcode/")
     make_qrcode_(make_url=make_url, save_path=save_path, qrcode_name="{}.png".format(inner_ip))
     # 自动打开浏览器
-    if kwargs.get("open_browser", False):
+    if kwargs.get("open_browser", True):
         open_url = "http://{}:{}".format(inner_ip, port)
         open_browser(open_url)
     app = create_app(debug=True)
-    app.run(host=host, port=port)
-    # socket_server.run(app, host=host, port=port)
+    # app.run(host=host, port=port)
+    socket_server.run(app, host=host, port=port)
 
 # -----------------------------------------------------------------------------
 # Main entry point

@@ -89,13 +89,15 @@ Ease, developers no longer need to rely on social applications (QQ, wechat) to c
 ## 版本说明
 
 > fast-ft 0.1.1
->
+> 
+> feature:
 > ```
 > 1.加入聊天大厅。
 > ```
 >
 > fast-ft 0.1.2
->
+> 
+> feature:
 > ```
 > 1.修复聊天大厅发送代码后样式错乱；
 > 2.添加每条消息copy复制按钮；
@@ -104,7 +106,9 @@ Ease, developers no longer need to rely on social applications (QQ, wechat) to c
 > 5.项目根目录加入到sys.path环境变量。
 > ```
 >
->fast-ft 0.1.4
+> fast-ft 0.1.4
+> 
+> feature:
 > ```
 > 1.修复聊天记录pre标签不会自动换行问题（原来需要手动换行才能换行，否则触发横向滑动）；
 > 2.修复开放选择端口机制，将重试机制由3次增加到10次；
@@ -113,10 +117,26 @@ Ease, developers no longer need to rely on social applications (QQ, wechat) to c
 > ```
 > 
 > fast-ft 0.1.5
+> 
+> feature:
 > ```
 > 1.优化fast-ft setup.py 安装依赖插件包指定版本;
 > 2.修复聊天室无法发送html代码问题;
 > 3.修复Android系统下h5无法获取[jpg, png]图片文件名漏洞。
+> ```
+> 
+> fast-ft 0.2.0
+> 
+> feature:
+> ```
+> 1.更换websocket插件为`flask_socketio`;
+> 2.websocket采用CBV(class base views)风格。
+> ```
+>
+> future feature:
+> ```
+> 1.http修改为CBV(class base views)风格；
+> 2.保留历史记录，可能会用到sqlite作为本地数据库。
 > ```
 > 
 

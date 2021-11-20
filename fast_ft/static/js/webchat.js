@@ -1,4 +1,5 @@
 $(function () {
+    console.log('来了吗？', new Date());
     $("textarea#input-content").on("focus", function () {
         if ($(this).attr("status") === "disable") {
             $(this).val("");
@@ -19,7 +20,7 @@ $(function () {
     let ip = '';
     let per_time = 0;
     let is_paly = false;
-    let ws = io.connect('http://' + document.domain + ':' + location.port + "/socket/");
+    let ws = io.connect('http://' + document.domain + ':' + location.port + "/chat");
     let content = $("#chat_content");
     ws.on("connect", function (data) {
         console.log('连接成功：', new Date());
@@ -53,7 +54,7 @@ $(function () {
             $('#input-content').val("说点什么吧...");
             $('#input-content').removeClass("focus-color");
             // ws.send(chat_data);
-            ws.emit("message", {'nick_name': nick_name, 'message': msg})
+            ws.emit("message", {'nick_name': nick_name, 'message': encodeURIComponent(msg)})
         }
         return false;
     }
@@ -180,4 +181,10 @@ $(function () {
     clipboard.on('error', function(e) {
         // alert('复制失败！');
     });
+    // window.addEventListener("beforeunload", function(event) {
+    //     console.log("页面关闭，同时关闭websocket！");
+    //     ws.emit("disconnect", {});
+    //     event.returnValue = "我在这写点东西...";
+    //     return true;
+    // });
 });
